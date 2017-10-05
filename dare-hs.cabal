@@ -1,0 +1,74 @@
+name:                dare-hs
+version:             0.1.0.0
+synopsis:            A file encryption library and tool                     
+description:         This module implements the Data-At-Rest-Encryption
+                     specification -
+                     <https://github.com/minio/sio/blob/master/DARE.md>
+homepage:            https://github.com/donatello/dare-hs#readme
+license:             BSD3
+license-file:        LICENSE
+author:              Aditya Manthramurthy
+maintainer:          myaditya@protonmail.ch
+copyright:           Apache2.0
+category:            Web
+build-type:          Simple
+extra-source-files:  README.md
+cabal-version:       >=1.10
+
+library
+  hs-source-dirs:      src
+  ghc-options:         -Wall -Odph
+  exposed-modules:     Crypto.Minio.Dare
+  other-modules:       Lib.Prelude
+  build-depends:       base >= 4.7 && < 5
+                     , protolude >= 0.1.6 && < 0.2
+                     , binary
+                     , bytestring
+                     , conduit
+                     , conduit-combinators
+                     , cryptonite
+                     , exceptions
+                     , memory
+                     , text
+                     , vector
+  default-language:    Haskell2010
+  default-extensions:  OverloadedStrings
+                     , NoImplicitPrelude
+                     , BangPatterns
+                     , MultiWayIf
+
+executable dare-hs-exe
+  hs-source-dirs:      app
+  main-is:             Main.hs
+  ghc-options:         -Wall -threaded -rtsopts -with-rtsopts=-N -Odph
+  build-depends:       base
+                     , dare-hs
+                     , protolude >= 0.1.6 && < 0.2
+                     , bytestring
+                     , conduit
+                     , conduit-extra
+                     , cryptonite
+                     , haskeline
+                     , memory
+                     , optparse-applicative
+  default-language:    Haskell2010
+  default-extensions:  OverloadedStrings
+                     , NoImplicitPrelude
+                     , ScopedTypeVariables
+                     , GADTs
+                     , BangPatterns
+
+test-suite dare-hs-test
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             Spec.hs
+  build-depends:       base
+                     , dare-hs
+                     , protolude >= 0.1.6 && < 0.2
+  ghc-options:         -Wall -threaded -rtsopts -with-rtsopts=-N
+  default-language:    Haskell2010
+  default-extensions:  OverloadedStrings, NoImplicitPrelude
+
+source-repository head
+  type:     git
+  location: https://github.com/donatello/dare-hs

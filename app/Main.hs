@@ -126,7 +126,7 @@ main = do
                                 CB.sinkHandle dstHdl
 
         else do nonce <- getNonce
-                case newEncryptionParams AES_256_GCM key nonce of
+                case newEncryptionParams (cipher pc) key nonce of
                   Left err -> print err
                   Right encParms -> do B.hPut dstHdl salt
                                        CB.sourceHandle srcHdl =$=

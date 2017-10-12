@@ -1,6 +1,7 @@
 module Main where
 
 import           Crypto.Minio.Dare
+import           Crypto.System.AES
 import           Protolude
 
 import qualified Crypto.KDF.Scrypt        as Scrypt
@@ -104,6 +105,10 @@ deriveKey pc srcHdl = do
 main :: IO ()
 main = do
   pc <- execParser opts
+
+  if supportsAESNI
+    then B8.putStrLn "AES-NI supported"
+    else B8.putStrLn "AES-NI unsupported"
 
   if isList pc
     then do B8.putStrLn "The following ciphers are supported:"

@@ -1,6 +1,6 @@
 name:                dare-hs
 version:             0.1.0.0
-synopsis:            A file encryption library and tool                     
+synopsis:            A file encryption library and tool
 description:         This module implements the Data-At-Rest-Encryption
                      specification -
                      <https://github.com/minio/sio/blob/master/DARE.md>
@@ -13,12 +13,15 @@ copyright:           Apache2.0
 category:            Web
 build-type:          Simple
 extra-source-files:  README.md
+                   , cbits/aes.c
+                   , cbits/aes.h
 cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
   ghc-options:         -Wall -Odph
   exposed-modules:     Crypto.Minio.Dare
+                     , Crypto.System.AES
   other-modules:       Lib.Prelude
   build-depends:       base >= 4.7 && < 5
                      , protolude >= 0.1.6 && < 0.2
@@ -36,6 +39,9 @@ library
                      , NoImplicitPrelude
                      , BangPatterns
                      , MultiWayIf
+  ghc-options: -O2
+  include-dirs: cbits
+  c-sources: cbits/aes.c
 
 executable dare-hs-exe
   hs-source-dirs:      app
